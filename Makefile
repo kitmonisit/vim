@@ -562,3 +562,21 @@ html: dist dist/$(COMMENT_HTML)
 farsi: dist dist/$(COMMENT_FARSI)
 	-rm -f dist/farsi$(VERSION).zip
 	zip -9 -rD -z dist/farsi$(VERSION).zip farsi < dist/$(COMMENT_FARSI)
+
+kitcustom-configure:
+	LDFLAGS="-L/pri/krm1/.linuxbrew/lib -L/pri/krm1/.conda/envs/python3-for-vim/lib" \
+	./configure \
+		--prefix=/pri/krm1/custom \
+		--enable-multibyte \
+		--with-tlib=ncurses \
+		--enable-cscope \
+		--enable-terminal \
+		--enable-perlinterp \
+		--enable-gui \
+		--with-x \
+		--enable-luainterp \
+		--with-lua-prefix=/pri/krm1/.linuxbrew \
+		--with-features=huge \
+		--enable-python3interp=dynamic \
+		--with-compiledby="kristofer.monisit@nordicsemi.no" \
+		--enable-fail-if-missing
