@@ -563,20 +563,47 @@ farsi: dist dist/$(COMMENT_FARSI)
 	-rm -f dist/farsi$(VERSION).zip
 	zip -9 -rD -z dist/farsi$(VERSION).zip farsi < dist/$(COMMENT_FARSI)
 
+#LDFLAGS="-L/pri/krm1/.linuxbrew/lib -L/pri/krm1/.conda/envs/python3-for-vim/lib"
+#--with-lua-prefix=/pri/krm1/.linuxbrew
+#PKG_CONFIG_PATH="/pri/krm1/.linuxbrew/lib/pkgconfig"
+#LDFLAGS="-L${HOME}/.linuxbrew/lib -L${HOME}/.linuxbrew/lib/perl5/5.34/x86_64-linux-thread-multi/CORE -L/pri/krm1/.conda/envs/python3-for-vim/lib -L/usr/lib64" \
+#PKG_CONFIG_PATH="/pri/krm1/.linuxbrew/lib/pkgconfig:/usr/lib64/pkgconfig"
 kitcustom-configure:
-	LDFLAGS="-L/pri/krm1/.linuxbrew/lib -L/pri/krm1/.conda/envs/python3-for-vim/lib" \
+	#export GCC="LD_LIBRARY_PATH=/pri/krm1/.linuxbrew/lib /pri/krm1/.linuxbrew/bin/gcc-12"
+	#CFLAGS="-I/pri/krm1/.linuxbrew/include" \
+	#CPPFLAGS="-I/pri/krm1/.linuxbrew/include" \
+	#CXXFLAGS="-I/pri/krm1/.linuxbrew/include"
+	#LDFLAGS="-L/usr/lib64 -L${HOME}/.linuxbrew/Cellar/perl/5.34.0_1/lib/perl5/5.34/x86_64-linux-thread-multi/CORE -L${HOME}/.conda/envs/python3-for-vim/lib"
+	#export PATH="${HOME}/.linuxbrew/opt/binutils/bin:${HOME}/.linuxbrew/opt/glibc/bin:${HOME}/.linuxbrew/opt/glibc/sbin:${PATH}" && \
+	#    which ld && \
+	#    which as && \
+	#CC="${HOME}/.linuxbrew/bin/gcc-12" \
+	#CXX="${HOME}/.linuxbrew/bin/g++-12" \
+	#CFLAGS="-I${HOME}/.linuxbrew/opt/glibc/include -I${HOME}/.linuxbrew/include -I/usr/include" \
+	#CPPFLAGS="-I${HOME}/.linuxbrew/opt/glibc/include -I${HOME}/.linuxbrew/include -I/usr/include" \
+	#LDFLAGS="-L${HOME}/.linuxbrew/opt/glibc/lib -L${HOME}/.linuxbrew/lib -L${HOME}/.linuxbrew/lib/perl5/5.34/x86_64-linux-thread-multi/CORE -L/usr/lib64 -L/usr/lib64/perl5/CORE -L${HOME}/.conda/envs/python3-for-vim/lib" \
+	#PKG_CONFIG_PATH="${HOME}/.linuxbrew/lib/pkgconfig:/usr/lib64/pkgconfig"
+	#export PATH="${HOME}/.linuxbrew/opt/binutils/bin:${HOME}/.linuxbrew/opt/glibc/bin:${HOME}/.linuxbrew/opt/glibc/sbin:${PATH}" && \
+	#    which ld && \
+	#    which as &&
+	#export PATH="${HOME}/.linuxbrew/opt/binutils/bin:${PATH}" &&
+	#CC="${HOME}/.linuxbrew/bin/gcc-12" \
+	#CXX="${HOME}/.linuxbrew/bin/g++-12"
+	LDFLAGS="-L/usr/lib64 -L/usr/lib64/perl5/CORE -L${HOME}/.conda/envs/python3-for-vim/lib" \
+	PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 	./configure \
 		--prefix=/pri/krm1/custom \
 		--enable-multibyte \
 		--with-tlib=ncurses \
 		--enable-cscope \
 		--enable-terminal \
-		--enable-perlinterp \
-		--enable-gui \
+		--enable-perlinterp=yes \
+		--enable-gui=gtk2 \
 		--with-x \
-		--enable-luainterp \
-		--with-lua-prefix=/pri/krm1/.linuxbrew \
+		--enable-luainterp=no \
+		--with-lua-prefix=${HOME}/.linuxbrew \
 		--with-features=huge \
 		--enable-python3interp=dynamic \
+		--with-python3-command=/pri/krm1/.conda/envs/python3-for-vim/bin/python3 \
 		--with-compiledby="kristofer.monisit@nordicsemi.no" \
 		--enable-fail-if-missing
