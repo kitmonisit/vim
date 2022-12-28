@@ -589,8 +589,10 @@ kitcustom-configure:
 	#export PATH="${HOME}/.linuxbrew/opt/binutils/bin:${PATH}" &&
 	#CC="${HOME}/.linuxbrew/bin/gcc-12" \
 	#CXX="${HOME}/.linuxbrew/bin/g++-12"
-	LDFLAGS="-L/usr/lib64 -L/usr/lib64/perl5/CORE -L${HOME}/.conda/envs/python3-for-vim/lib" \
-	PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+	#LDFLAGS="-L/usr/lib64 -L/usr/lib64/perl5/CORE -L${HOME}/.conda/envs/python3-for-vim/lib"
+	#PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
+	LDFLAGS="-L${HOME}/.linuxbrew/lib -L${HOME}/.linuxbrew/lib/perl5/5.34/x86_64-linux-thread-multi/CORE -L${HOME}/.conda/envs/python3-for-vim/lib" \
+	PKG_CONFIG_PATH="${HOME}/.linuxbrew/lib/pkgconfig" \
 	./configure \
 		--prefix=/pri/krm1/custom \
 		--enable-multibyte \
